@@ -1,0 +1,63 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build all",
+            "type": "shell",
+            "command": "mingw32-make.exe all -C source",
+            "dependsOn": "recompile gui",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build arcadeSystem",
+            "type": "shell",
+            "command": "mingw32-make.exe all -C source",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clean arcadeSystem",
+            "type": "shell",
+            "command": "mingw32-make.exe clean -C source",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run arcadeSystem",
+            "type": "shell",
+            "command": "cd ../ArcadeSystem/source; ./arcadeSystem.exe",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "recompile gui",
+            "type": "shell",
+            "command": "mingw32-make.exe -C GUI_files/cpp_files",
+            "dependsOn": "clean gui",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "clean gui",
+            "type": "shell",
+            "command": "mingw32-make.exe clean -C GUI_files/cpp_files",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+  }
