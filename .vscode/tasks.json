@@ -9,7 +9,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "build arcadeSystem",
@@ -32,11 +33,14 @@
         {
             "label": "run arcadeSystem",
             "type": "shell",
-            "command": "cd ../ArcadeSystem/source; ./arcadeSystem.exe",
+            "command": "cd source; ./arcadeSystem.exe",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         {
             "label": "recompile gui",

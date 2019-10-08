@@ -3,8 +3,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-const int windowHeight = 1.5*480;
-const int windowWidth = 1.5*640;
+const int windowHeight = 480;
+const int windowWidth = 640;
 
 const int defaultTextureWidth = 100;
 const int defaultTextureHeight = 100;
