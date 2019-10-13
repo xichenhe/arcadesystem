@@ -5,7 +5,6 @@
 #include "SDL_ttf.h"
 #include "SDL_image.h"
 #include "Config.h"
-#include "RootNode.h"
 #include <stdio.h>
 
 // declaring pointer to objects that main needs, initialize to null
@@ -69,21 +68,18 @@ int main(int argc, char* argv[])
 	else
 	{
 		bool quit = false;
-		Node* currentNode = new RootNode(arcadeSystemRenderer, nullptr);
 		while (!quit)
 		{	
 			// handle events on queue until empty
 			SDL_Event e;
 			while (SDL_PollEvent(&e) != 0)
 			{
-				currentNode->update(&e);
 				// user requests quit by clicking window X
 				if (e.type == SDL_QUIT)
 				{
 					quit = true;
 				}
 			}
-			currentNode->render(arcadeSystemRenderer);
 			SDL_RenderPresent(arcadeSystemRenderer);
 		}
 	}
