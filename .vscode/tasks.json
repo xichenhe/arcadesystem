@@ -13,6 +13,17 @@
             "problemMatcher": []
         },
         {
+            "label": "recompile arcadeSystem",
+            "type": "shell",
+            "command": "mingw32-make.exe all -C source",
+            "dependsOn": "clean arcadeSystem",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "build arcadeSystem",
             "type": "shell",
             "command": "mingw32-make.exe all -C source",
