@@ -53,6 +53,16 @@ public:
 	int getW() { return imageDestination.w; }
 	int getH() { return imageDestination.h; }
 
+	void setXPosition(int x_in)
+	{
+		imageDestination.x = x_in;
+	}
+
+	void setYPosition(int y_in)
+	{
+		imageDestination.y = y_in;
+	}
+
 	void setPosition(int x_in, int y_in)
 	{
 		if (x_in == CENTER_X)

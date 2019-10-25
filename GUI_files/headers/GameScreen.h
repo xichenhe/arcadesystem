@@ -26,13 +26,12 @@ public:
 		}
 	}
 
-	// method to update, returns an Action struct, takes in the input as parameter
-	virtual Action update(SDL_Event* event);
 	virtual void newGame() = 0;
+
+	virtual Action update(SDL_Event* event);
+
 	// method to render the current Screen
 	virtual void render(SDL_Renderer* renderer);
-
-	//virtual Entity* createEntity(ArcadeTexture* texture_in, bool state_in, double xVel_in, double yVel_in, int xPos_in, int yPos_in, int w_in, int h_in) = 0;
 
 	std::vector<Entity*>* getEntities() { return &entities; }
 	void addEntity(Entity* entity_in) { entities.push_back(entity_in); }
@@ -54,10 +53,8 @@ public:
 
 	void setisNewGame(bool isNewGame_in) { isNewGame = isNewGame_in; }
 	bool getIsNewGame() { return isNewGame; }
-	void loadGrid();
-	void updateGrid();
+
 	void restartGame();
-	int side = 20;
 
 	struct playerScore
 	{
@@ -68,15 +65,13 @@ public:
 private:
 	std::vector<Entity*> entities;
 	std::vector<Entity*> movingEntities;
+
 	void* parentNode;
-	std::vector<Entity*> gridContainer[8][6];
-	
 
 	void* pauseScreen;
 	void* gameOverScreen;
 
 	bool gameState;
-
 	bool isNewGame;
 };
 #endif
