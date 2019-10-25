@@ -35,8 +35,22 @@ public:
 
 	int getXPos() { return xPos; }
 	int getYPos() { return yPos; }
-	void setYPos(int yPos_in) { yPos = yPos_in; }
-	void setXPos(int xPos_in) { xPos = xPos_in; }
+	void setYPos(int yPos_in) 
+	{
+		yPos = yPos_in;
+		if(getGameObjectTexture())
+		{
+			getGameObjectTexture()->setYPosition(yPos);
+		} 
+	}
+	void setXPos(int xPos_in) 
+	{ 
+		xPos = xPos_in;
+		if(getGameObjectTexture())
+		{
+			getGameObjectTexture()->setXPosition(xPos);
+		} 
+	}
 
 	int getWidth() { return width; }
 	int getHeight() { return height; }
@@ -46,18 +60,14 @@ public:
 	virtual void update(SDL_Event* event) = 0;
 	virtual void render(SDL_Renderer* renderer)
 	{
-		//getGameObjectTexture()->setTexturePosition(getXPos(), getYPos());
-		//printf("RENDER entity: %i\n\n", getYPos());
 		getGameObjectTexture()->render(renderer); 
 	}
 	void setState(bool state_in) { state = state_in; }
 	bool getState() { return state; }
 	
 private:
-	//std::vector<ArcadeTexture::gridSquare> squares;
-	//SDL_Rect* gameObject;
 	bool state;
-	ArcadeTexture* gameObjectTexture;
+	ArcadeTexture* gameObjectTexture = nullptr;
 
 	double xVelocity;		
 	double yVelocity;
