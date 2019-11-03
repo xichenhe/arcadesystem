@@ -1,12 +1,13 @@
 
 // main.cpp
+// main.cpp
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "SDL_ttf.h"
 #include "SDL_image.h"
 #include "Config.h"
 #include <stdio.h>
-#include "RootNode.h"
+#include "GameNode.h"
 
 // declaring pointer to objects that main needs, initialize to null
 // these objects are created in main because they are needed for the outermost loop
@@ -69,7 +70,7 @@ int main(int argc, char* argv[])
 	else
 	{
 		bool quit = false;
-		RootNode currentNode(arcadeSystemRenderer, nullptr);
+		GameNode currentNode(arcadeSystemRenderer, nullptr);
 		while (!quit)
 		{	
 			// handle events on queue until empty
