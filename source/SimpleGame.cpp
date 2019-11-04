@@ -71,7 +71,6 @@ void SimpleGame::newGame()
     paddle->setXPos(0);
     paddle->setYPos(windowHeight-paddle->getHeight());//you should plus the height of the paddle
     paddle->setXVelocity(0);
-
     setisNewGame(false);
 }
 
@@ -95,11 +94,12 @@ void SimpleGame::logic()
         getBall()->setXVelocity(-(getBall()->getXVelocity()));
         }
     
-    else if (getBall()->getYPos() + ball->getHeight() > windowHeight)//this means the game over(the ball out of screen range)
+    else if (getBall()->getYPos() + getBall()->getHeight() > windowHeight)//this means the game over(the ball out of screen range)
 	{
-		getBall()->setYPos(windowHeight - getBall()->getHeight());
-		getBall()->setYVelocity(-(getBall()->getYVelocity()));
-	}
+		//getBall()->setYPos(windowHeight - getBall()->getHeight());
+		//getBall()->setYVelocity(-(getBall()->getYVelocity()));
+        setGameState(false);
+    }
 
     //..................................
 

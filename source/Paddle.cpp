@@ -11,24 +11,26 @@ Paddle::Paddle()
 
 void Paddle::update(SDL_Event* event)
 {
-    if((event)&& (*event).type ==SDL_KEYDOWN && (*event).key.repeat==0)
+    if((event!=nullptr)&& ((*event).type ==SDL_KEYDOWN) && (*event).key.repeat==0)
     {
         switch((*event).key.keysym.sym)
         {
             case SDLK_RIGHT:
             {
+                printf("\nRIGHT\n");
                 setXVelocity(getXVelocity()+8);
                 break;
             }
             case SDLK_LEFT:
             {
-                setYVelocity(getYVelocity()-8);
+                printf("\nLEFT\n");
+                setXVelocity(getXVelocity()-8);
                 break;
             }
         }
         
     }
-    else if((event)&&(*event).type==SDL_KEYUP && (*event).key.repeat==0)
+    else if((event!=nullptr)&&((*event).type==SDL_KEYUP) && (*event).key.repeat==0)
     {
         switch((*event).key.keysym.sym)
         {
@@ -39,7 +41,7 @@ void Paddle::update(SDL_Event* event)
             }
             case SDLK_LEFT:
             {
-                setYVelocity(getYVelocity()+8);
+                setXVelocity(getXVelocity()+8);
                 break;
             }
         }
