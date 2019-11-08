@@ -21,4 +21,10 @@ enum geometryPosition
 	HEIGHT_ORIGINAL
 };
 
+struct point
+{
+        int x;
+	int y;
+};
+
 #endif
