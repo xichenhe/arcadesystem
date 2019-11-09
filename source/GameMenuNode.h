@@ -8,6 +8,8 @@
 
 #include "SimpleButton.h"
 
+#include "GameNode.h"
+
 #include "Config.h"
 
 
@@ -15,6 +17,10 @@
 class GameMenuNode : public Node
 
 {
+
+private:
+
+    GameNode* gameNode;
 
 public:
 
@@ -24,7 +30,13 @@ public:
 
 	{
 
-    		MenuScreen* tetrisScreen = createMenuScreen();
+        gameNode = new GameNode(renderer_in, this);
+
+        children.push_back(gameNode);
+
+
+
+    	MenuScreen* tetrisScreen = createMenuScreen();
 
 		MenuScreen* froggerScreen = createMenuScreen();
 
@@ -126,7 +138,7 @@ public:
 
 		brickBreakerButton->setButtonPosition(windowWidth / 2 - brickBreakerButton->getWidth() / 2, windowHeight / 2 - brickBreakerButton->getHeight() / 2);
 
-		brickBreakerButton->setButtonAction(createAction(MOVE_NODES, getParentNode()));
+		brickBreakerButton->setButtonAction(createAction(MOVE_NODES, gameNode));
 
 		brickBreakerScreen->addButtonToScreen(brickBreakerButton);
 
