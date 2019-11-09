@@ -699,6 +699,9 @@ void SimpleGame::logic()
 		}
 
 	}
-
+    if (numFalse>=50)
+    {
+        setGameState(false);
+    }
 }
 
