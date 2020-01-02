@@ -1,5 +1,8 @@
 // Entity.h
 
+// DESCRIPTION
+// This is an abstract class for a generic game object
+
 #ifndef ENTITY_H
 #define ENTITY_H
 
@@ -13,57 +16,30 @@ public:
 	{
 		delete gameObjectTexture;
 	}
-	//void setGameObject(SDL_Rect* gameObject_in) { gameObject = gameObject_in; }
-
-	//SDL_Rect* getGameObject() { return gameObject; }
 
 	ArcadeTexture* getGameObjectTexture() { return gameObjectTexture; }
 
-	void setGameObjectTexture(ArcadeTexture* gameObjectTexture_in) 
-	{ 
-		gameObjectTexture = gameObjectTexture_in;
-		xPos = gameObjectTexture->getX();
-		yPos = gameObjectTexture->getY();
-		width = gameObjectTexture->getW();
-		height = gameObjectTexture->getH();
-	}
-
+	// ACCESSORS
 	int getXVelocity() { return xVelocity; }
 	int getYVelocity() { return yVelocity; }
-	void setYVelocity(int yVelocity_in) { yVelocity = yVelocity_in; }
-	void setXVelocity(int xVelocity_in) { xVelocity = xVelocity_in; }
-
 	int getXPos() { return xPos; }
 	int getYPos() { return yPos; }
-	void setYPos(int yPos_in) 
-	{
-		yPos = yPos_in;
-		if(getGameObjectTexture())
-		{
-			getGameObjectTexture()->setYPosition(yPos);
-		} 
-	}
-	void setXPos(int xPos_in) 
-	{ 
-		xPos = xPos_in;
-		if(getGameObjectTexture())
-		{
-			getGameObjectTexture()->setXPosition(xPos);
-		} 
-	}
-
 	int getWidth() { return width; }
 	int getHeight() { return height; }
+	bool getState() { return state; }
+
+	// MUTATORS
+	void setState(bool state_in) { state = state_in; }
+	void setXVelocity(int xVelocity_in) { xVelocity = xVelocity_in; }
+	void setYVelocity(int yVelocity_in) { yVelocity = yVelocity_in; }
+	void setYPos(int yPos_in);
+	void setXPos(int xPos_in);
 	void setHeight(int height_in) { height = height_in; }
 	void setWidth(int width_in) { width = width_in; }
+	void setGameObjectTexture(ArcadeTexture* gameObjectTexture_in);
 
 	virtual void update(SDL_Event* event) = 0;
-	virtual void render(SDL_Renderer* renderer)
-	{
-		getGameObjectTexture()->render(renderer); 
-	}
-	void setState(bool state_in) { state = state_in; }
-	bool getState() { return state; }
+	virtual void render(SDL_Renderer* renderer);
 	
 private:
 	bool state;
@@ -77,7 +53,6 @@ private:
 
 	int width;
 	int height;
-
 };
 
 #endif

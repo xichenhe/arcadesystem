@@ -1,5 +1,9 @@
 // GameScreen.h
 
+// DESCRIPTION
+// This is an abstract class for a generic game screen.
+// Game screens are basically just games.
+
 #ifndef GAME_SCREEN
 #define GAME_SCREEN
 
@@ -9,34 +13,18 @@ class GameScreen : public Screen
 {
 public:
 
-	virtual ~GameScreen()
-	{
-		for (int i = 0; i < getArcadeTextureList()->size(); i++)
-		{
-			if ((*getArcadeTextureList())[i] != nullptr)
-			{
-				delete (*getArcadeTextureList())[i];
-				(*getArcadeTextureList())[i] = nullptr;
-			}
-
-		}
-		for (int i = 0; i < entities.size(); i++)
-		{
-			delete entities[i];
-		}
-	}
+	virtual ~GameScreen();
 
 	virtual void newGame() = 0;
 
 	virtual Action update(SDL_Event* event);
 
-	// method to render the current Screen
 	virtual void render(SDL_Renderer* renderer);
 
-	std::vector<Entity*>* getEntities() { return &entities; }
+	std::vector<Entity*>& getEntities() { return entities; }
 	void addEntity(Entity* entity_in) { entities.push_back(entity_in); }
 
-	std::vector<Entity*>* getMovingEntities() { return &movingEntities; }
+	std::vector<Entity*>& getMovingEntities() { return movingEntities; }
 	void addMovingEntity(Entity* movingEntity_in) { movingEntities.push_back(movingEntity_in); }
 
 	void setParentNode(void* parentNode_in) { parentNode = parentNode_in; }
