@@ -1,5 +1,8 @@
+// ArcadeTexture.cpp
+
 #include "ArcadeTexture.h"
 
+// Default Constructor
 ArcadeTexture::ArcadeTexture()
 {
 	texture = nullptr;
@@ -9,11 +12,105 @@ ArcadeTexture::ArcadeTexture()
 	fileWidth = 0;
 	fileHeight = 0;
 
+	// no cropping by defualt
 	isEntireSource = true;
 	isEntireDestination = false;
 }
 
-// Deallocates memory
+// MUTATORS
+void ArcadeTexture::setXSrc(int x_in)
+{
+	if(x_in < 0)
+	{
+		printf("WARNING: x position of texture (%i) is negative", x_in);
+	}
+	imageDestination.x = x_in;
+}
+
+void ArcadeTexture::setYSrc(int y_in)
+{
+	if(y_in < 0)
+	{
+		printf("WARNING: y position of texture (%i) is negative", y_in);
+	}
+	imageDestination.y = y_in;
+}
+
+void ArcadeTexture::setPositionSrc(int x_in, int y_in)
+{
+	if (x_in == CENTER_X)
+	{
+		x_in = windowWidth / 2 - fileWidth / 2;
+	}
+	if (x_in == CENTER_Y)
+	{
+		x_in = windowHeight / 2 - fileHeight / 2;
+	}
+	imageDestination.x = x_in;
+	imageDestination.y = y_in;
+}
+
+void ArcadeTexture::setSizeSrc(int w_in, int h_in)
+{
+	if (w_in == WIDTH_ORIGINAL)
+	{
+		w_in = fileWidth;
+	}
+	if (h_in == HEIGHT_ORIGINAL)
+	{
+		h_in = fileHeight;
+	}
+	imageDestination.w = w_in;
+	imageDestination.h = h_in;
+}
+
+void ArcadeTexture::setX(int x_in)
+{
+	if(x_in < 0)
+	{
+		printf("WARNING: x position of texture (%i) is negative", x_in);
+	}
+	imageDestination.x = x_in;
+}
+
+void ArcadeTexture::setY(int y_in)
+{
+	if(y_in < 0)
+	{
+		printf("WARNING: y position of texture (%i) is negative", y_in);
+	}
+	imageDestination.y = y_in;
+}
+
+void ArcadeTexture::setPosition(int x_in, int y_in)
+{
+	if (x_in == CENTER_X)
+	{
+		x_in = windowWidth / 2 - fileWidth / 2;
+	}
+	if (x_in == CENTER_Y)
+	{
+		x_in = windowHeight / 2 - fileHeight / 2;
+	}
+	imageDestination.x = x_in;
+	imageDestination.y = y_in;
+}
+
+void ArcadeTexture::setSize(int w_in, int h_in)
+{
+	if (w_in == WIDTH_ORIGINAL)
+	{
+		w_in = fileWidth;
+	}
+	if (h_in == HEIGHT_ORIGINAL)
+	{
+		h_in = fileHeight;
+	}
+	imageDestination.w = w_in;
+	imageDestination.h = h_in;
+}
+
+// Destructor
 ArcadeTexture::~ArcadeTexture() 
 { 
 	myFree(); 
@@ -34,9 +131,10 @@ void ArcadeTexture::myFree()
 		TTF_CloseFont(fontRen);
 	}
 }
-//Loads image at specified path
+// Creates texture from image at specified path
 bool ArcadeTexture::loadFromFile(std::string path)
 {
+	// if want to reload a texture, clear it first
 	SDL_DestroyTexture(texture);
 	texture = nullptr;
 
@@ -73,6 +171,7 @@ bool ArcadeTexture::loadFromFile(std::string path)
 	return texture != nullptr;
 }
 
+// used to create text
 bool ArcadeTexture::loadFromRenderedText(std::string filePath, int size, std::string textureText, SDL_Color textColor)
 {
 	SDL_DestroyTexture(texture);
@@ -129,7 +228,7 @@ void ArcadeTexture::setSelected(bool selected_in)
 	
 }
 
-//Renders texture at given point
+// Renders texture at given point
 void ArcadeTexture::render(SDL_Renderer* renderer)
 {
 	SDL_Rect* source = &textureClip;
@@ -145,9 +244,3 @@ void ArcadeTexture::render(SDL_Renderer* renderer)
 	}
 	SDL_RenderCopy(renderer, texture, source, dest);
 }
-
-
-
-
-
-

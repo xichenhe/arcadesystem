@@ -1,4 +1,22 @@
+// GameScreen.cpp
+
 #include "GameScreen.h"
+
+GameScreen:: ~GameScreen()
+{
+	for (int i = 0; i < getArcadeTextureList().size(); i++)
+	{
+		if (getArcadeTextureList()[i] != nullptr)
+		{
+			delete getArcadeTextureList()[i];
+			getArcadeTextureList()[i] = nullptr;
+		}
+	}
+	for (int i = 0; i < entities.size(); i++)
+	{
+		delete entities[i];
+	}
+}
 
 void GameScreen::restartGame()
 {
@@ -6,7 +24,6 @@ void GameScreen::restartGame()
 	isNewGame = true;
 }
 
-// method to update, returns an Action struct, takes in the input as parameter
 Action GameScreen::update(SDL_Event* event)
 {
 	Action newAction = { DO_NOTHING, nullptr };
@@ -29,16 +46,16 @@ Action GameScreen::update(SDL_Event* event)
 void GameScreen::render(SDL_Renderer* renderer)
 {
 	// the screen first renders all its textures
-	for (int i = 0; i < getArcadeTextureList()->size(); i++)
+	for (int i = 0; i < getArcadeTextureList().size(); i++)
 	{
-		(*getArcadeTextureList())[i]->render(renderer);
+		getArcadeTextureList()[i]->render(renderer);
 	}
 
 	// the screen then renders all its buttons
-	for (int i = 0; i < getEntities()->size(); i++)
+	for (int i = 0; i < getEntities().size(); i++)
 	{
-		if ((*getEntities())[i]->getState() == false)
+		if (getEntities()[i]->getState() == false)
 			continue;
-		(*getEntities())[i]->render(renderer);
+		getEntities()[i]->render(renderer);
 	}
 }
