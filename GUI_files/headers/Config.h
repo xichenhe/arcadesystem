@@ -7,7 +7,7 @@
 #define CONFIG_H
 
 const int windowHeight = 480;
-const int windowWidth = 300;
+const int windowWidth = 640;
 
 enum geometryPosition
 {

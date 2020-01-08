@@ -33,8 +33,6 @@ public:
 
 	std::vector<Button*>& getButtonList() { return buttonList; }
 
-	void inputText(SDL_Event* e);
-
 private:
 	std::vector<Button*> buttonList;
 };

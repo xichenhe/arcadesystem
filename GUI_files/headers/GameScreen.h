@@ -9,6 +9,7 @@
 
 #include "Screen.h"
 #include "Entity.h"
+
 class GameScreen : public Screen
 {
 public:
@@ -44,12 +45,24 @@ public:
 
 	void restartGame();
 
+	void submitScore(SDL_Event* e, SDL_Renderer* ren);
+
 	struct playerScore
 	{
 		std::string gameName;
 		std::string name;
 		int score;
 	};
+
+	bool CompareEntries(const playerScore& left, const playerScore& right) 
+	{
+		return left.score > right.score;
+	}
+
+	std::string gameName;
+	int gameScore;
+	ArcadeTexture* gameScoreTexture;
+	
 private:
 	std::vector<Entity*> entities;
 	std::vector<Entity*> movingEntities;
@@ -63,4 +76,3 @@ private:
 	bool isNewGame;
 };
 #endif
-
