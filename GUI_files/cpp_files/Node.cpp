@@ -36,6 +36,11 @@ Action Node::update(SDL_Event* event)
 		currentScreen = (Screen*)newAction.actionParameter;
 		newAction = { DO_NOTHING, nullptr };
 	}
+	// else if(newAction.actionName == GAME_OVER)
+	// {
+	// 	currentScreen = (Screen*)newAction.actionParameter;
+	// 	newAction = { DO_NOTHING, nullptr };
+	// }
 
 	// otherwise return the action to main because all other actions are executed at the main level
 	return newAction;

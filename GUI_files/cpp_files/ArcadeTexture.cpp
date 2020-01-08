@@ -12,7 +12,7 @@ ArcadeTexture::ArcadeTexture()
 	fileWidth = 0;
 	fileHeight = 0;
 
-	// no cropping by defualt
+	// No cropping by defualt
 	isEntireSource = true;
 	isEntireDestination = false;
 }
@@ -66,19 +66,19 @@ void ArcadeTexture::setSizeSrc(int w_in, int h_in)
 
 void ArcadeTexture::setX(int x_in)
 {
-	if(x_in < 0)
-	{
-		printf("WARNING: x position of texture (%i) is negative", x_in);
-	}
+	// if(x_in < 0)
+	// {
+	// 	printf("WARNING: x position of texture (%i) is negative", x_in);
+	// }
 	imageDestination.x = x_in;
 }
 
 void ArcadeTexture::setY(int y_in)
 {
-	if(y_in < 0)
-	{
-		printf("WARNING: y position of texture (%i) is negative", y_in);
-	}
+	// if(y_in < 0)
+	// {
+	// 	printf("WARNING: y position of texture (%i) is negative", y_in);
+	// }
 	imageDestination.y = y_in;
 }
 
