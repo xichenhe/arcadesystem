@@ -28,13 +28,17 @@ all: $(OBJ_NAME)
 
 # 2 ArcadeSystem depends on the .o files, g++ -o ArcadeSystem *.o
 # the .o files come from the wilcard statements
-$(OBJ_NAME): $(OBJS) ../GUI_files/cpp_files/*.o *.h
+$(OBJ_NAME): $(OBJS) ../GUI_files/cpp_files/*.o
 	$(CXX) $^ $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $@ 
 
 # 3 all the .o files rely on the .cpp files
-# make typically does this automatically but we need to 
-# add extra information about the header files
-%.o: %.cpp
-	$(CXX) $(INCLUDE_PATHS) $(COMPILER_FLAGS) -c $< 
+# make typically does this implicitly but we
+# only want each .o to rely only on its .cpp
+DEPS := $(OBJS:.o=.d)
+
+-include $(DEPS)
+
+$(OBJS): %.o: %.cpp
+	$(CXX) -MMD -c $(INCLUDE_PATHS) $(COMPILER_FLAGS) $< -o $@
 clean:
-	del *.o $(OBJ_NAME)
+	del *.o *.d $(OBJ_NAME)
