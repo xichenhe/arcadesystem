@@ -5,7 +5,7 @@
             "label": "build all",
             "type": "shell",
             "command": "mingw32-make.exe all -C source",
-            "dependsOn": "recompile gui",
+            "dependsOn": "compile gui",
             "group": {
                 "kind": "build",
                 "isDefault": true
