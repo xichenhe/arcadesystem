@@ -1,3 +1,5 @@
+// OptionsButton.cpp
+
 #include "OptionsButton.h"
 
 // override constructor
@@ -7,7 +9,6 @@ OptionsButton::OptionsButton(std::string texturePath_in)
 	optionTexture = nullptr;
 	currentIndex = 0;
 }
-
 
 OptionsButton::~OptionsButton()
 {
@@ -21,10 +22,7 @@ OptionsButton::~OptionsButton()
 	}
 	delete optionTexture;
 }
-// method to update
 
-// if the event is a tab just return move button selector
-// if event is key press enter, this button's action and action parameter are returned
 Action OptionsButton::update(SDL_Event* event)
 {
 	// at the end we return newAction. We initialize it to do nothing and change it based on the event
@@ -57,8 +55,6 @@ Action OptionsButton::update(SDL_Event* event)
 	{
 		inside = false;
 	}
-
-	//Mouse is outside button
 	if (!inside)
 	{
 		optionTexture->setSelected(false);
@@ -68,37 +64,17 @@ Action OptionsButton::update(SDL_Event* event)
 		optionTexture->setSelected(true);
 	}
 
-	if (event && (event->type == SDL_MOUSEMOTION || event->type == SDL_MOUSEBUTTONDOWN))
+	if (event && event->type == SDL_MOUSEBUTTONDOWN && inside)
 	{
-		if (!inside)
+		if (currentIndex + 1 < buttonActionList.size())
 		{
-			optionTexture->setSelected(false);
+			currentIndex += 1;
+			newAction = *buttonActionList[currentIndex];
 		}
 		else
 		{
-			//Set mouse over sprite
-			switch (event->type)
-			{
-			case SDL_MOUSEMOTION:
-				optionTexture->setSelected(true);
-				break;
-
-			case SDL_MOUSEBUTTONDOWN:
-				if (currentIndex + 1 < buttonActionList.size())
-				{
-					currentIndex += 1;
-					newAction = *buttonActionList[currentIndex];
-				}
-				else
-				{
-					currentIndex = 0;
-					newAction = *buttonActionList[currentIndex];
-				}
-				break;
-				/*case SDL_MOUSEBUTTONUP:
-					mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
-					break;*/
-			}
+			currentIndex = 0;
+			newAction = *buttonActionList[currentIndex];
 		}
 	}
 	return newAction;
@@ -107,8 +83,6 @@ Action OptionsButton::update(SDL_Event* event)
 // method to render the current Buttons
 void OptionsButton::render(SDL_Renderer* renderer)
 {
-	//printf("current button texture   %p \n", buttonTextureList[currentIndex]);
 	optionTexture->render(renderer);
 	buttonTextureList[currentIndex]->render(renderer);
 }
-

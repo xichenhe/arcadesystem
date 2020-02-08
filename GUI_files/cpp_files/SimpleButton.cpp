@@ -1,3 +1,5 @@
+// SimpleButton.cpp
+
 #include "SimpleButton.h"
 
 SimpleButton::SimpleButton()
@@ -27,9 +29,6 @@ SimpleButton::~SimpleButton()
 	delete buttonTexture;
 }
 
-// UPDATE
-// if the event is a tab or arrow key, then increment the button selector by one
-// if the event is enter, then return the button's action and actionParameter
 Action SimpleButton::update(SDL_Event* event)
 {
 	// at the end we return newAction. We initialize it to do nothing and change it based on the event
@@ -71,33 +70,9 @@ Action SimpleButton::update(SDL_Event* event)
 		buttonTexture->setSelected(true);
 	}
 
-	if (event && (event->type == SDL_MOUSEMOTION || event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP))
+	if (event && event->type == SDL_MOUSEBUTTONDOWN && inside)
 	{
-		//Mouse is outside button
-		if (!inside)
-		{
-			buttonTexture->setSelected(false);
-		}
-		else
-		{
-			//Set mouse over sprite
-			switch (event->type)
-			{
-			case SDL_MOUSEMOTION:
-				buttonTexture->setSelected(true);
-				break;
-
-			case SDL_MOUSEBUTTONDOWN:
-				printf("MOUSE CLICKED ====================================================");
-				newAction = *getButtonAction();
-				break;
-				break;
-
-				/*case SDL_MOUSEBUTTONUP:
-					mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
-					break;*/
-			}
-		}
+		newAction = *getButtonAction();
 	}
 	return newAction;
 }
@@ -106,9 +81,5 @@ Action SimpleButton::update(SDL_Event* event)
 // simply call the ArcadeTexture render method on the button's texture
 void SimpleButton::render(SDL_Renderer* renderer)
 {
-	//printf("current button texture   %p \n", getButtonTexture());
 	getButtonTexture()->render(renderer);
 }
-
-
-

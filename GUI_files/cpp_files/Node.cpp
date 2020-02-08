@@ -1,3 +1,5 @@
+// Node.cpp
+
 #include "Node.h"
 
 Node::Node(SDL_Renderer* renderer_in, Node* parentNode_in)
@@ -23,7 +25,6 @@ Node::~Node()
 	}
 }
 
-// method to update, returns an Action struct, takes in the event (keystroke, mouse click, etc) as parameter
 Action Node::update(SDL_Event* event)
 {
 	// passing the event to the current screen which returns an action
@@ -35,6 +36,11 @@ Action Node::update(SDL_Event* event)
 		currentScreen = (Screen*)newAction.actionParameter;
 		newAction = { DO_NOTHING, nullptr };
 	}
+	// else if(newAction.actionName == GAME_OVER)
+	// {
+	// 	currentScreen = (Screen*)newAction.actionParameter;
+	// 	newAction = { DO_NOTHING, nullptr };
+	// }
 
 	// otherwise return the action to main because all other actions are executed at the main level
 	return newAction;
@@ -70,7 +76,7 @@ SimpleButton* Node::createSimpleButton(SDL_Renderer* renderer_in, std::string te
 	// this method will initialize a button and its texture, the user needs to set the position and action and add it to a screen
 	SimpleButton* newSimpleButton = new SimpleButton(texturePath_in);
 	newSimpleButton->setButtonTexture(createImage(renderer_in, texturePath_in));
-	newSimpleButton->setButtonSize(newSimpleButton->getButtonTexture()->getW(), newSimpleButton->getButtonTexture()->getH());
+	newSimpleButton->setButtonSize(newSimpleButton->getButtonTexture()->getWidth(), newSimpleButton->getButtonTexture()->getHeight());
 	return newSimpleButton;
 }
 
@@ -83,8 +89,8 @@ SimpleButton* Node::createSimpleButton(ArcadeTexture* arcadeTexture_in)
 	}
 	SimpleButton* newSimpleButton = new SimpleButton;
 	newSimpleButton->setButtonTexture(arcadeTexture_in);
-	newSimpleButton->setHeight(newSimpleButton->getButtonTexture()->getH());
-	newSimpleButton->setWidth(newSimpleButton->getButtonTexture()->getW());
+	newSimpleButton->setHeight(newSimpleButton->getButtonTexture()->getHeight());
+	newSimpleButton->setWidth(newSimpleButton->getButtonTexture()->getWidth());
 	return newSimpleButton;
 }
 
@@ -104,7 +110,7 @@ SimpleButton* Node::createSimpleTextButton(SDL_Renderer* renderer_in, std::strin
 {
 	SimpleButton* newSimpleButton = new SimpleButton(texturePath_in);
 	newSimpleButton->setButtonTexture(createSimpleText(renderer_in, texturePath_in, size_in, text_in, r, g, b));
-	newSimpleButton->setButtonSize(newSimpleButton->getButtonTexture()->getW(), newSimpleButton->getButtonTexture()->getH());
+	newSimpleButton->setButtonSize(newSimpleButton->getButtonTexture()->getWidth(), newSimpleButton->getButtonTexture()->getHeight());
 	return newSimpleButton;
 }
 
@@ -114,8 +120,8 @@ OptionsButton* Node::createOptionsButton(SDL_Renderer* renderer_in,
 	OptionsButton* newOptionsButton = new OptionsButton( texturePath_in);
 	ArcadeTexture* optionsTexture = createSimpleText(renderer_in, texturePath_in, size_in, text_in, r, g, b);
 	newOptionsButton->setOptionTexture(optionsTexture);
-	newOptionsButton->setHeight(newOptionsButton->getOptionTexture()->getH());
-	newOptionsButton->setWidth(newOptionsButton->getOptionTexture()->getW());
+	newOptionsButton->setHeight(newOptionsButton->getOptionTexture()->getHeight());
+	newOptionsButton->setWidth(newOptionsButton->getOptionTexture()->getWidth());
 	return newOptionsButton;
 }
 
